@@ -17,7 +17,7 @@ ENV AWS_ACCESS_KEY_ID=$aws_access_key_id
 ENV AWS_SECRET_ACCESS_KEY=$aws_secret_access_key
 
 # aquire certificate
-RUN certbot certonly --dns-route53 -d *.chomosuke.com -m a13323600@gmail.com --agree-tos -n
+RUN certbot certonly --dns-route53 -d chomosuke.com -d *.chomosuke.com -m a13323600@gmail.com --agree-tos -n
 
 # setup auto renewal
 RUN echo "0 0,12 * * * root /opt/certbot/bin/python -c 'import random; import time; time.sleep(random.random() * 3600)' && certbot renew -q" | tee -a /etc/crontab > /dev/null
