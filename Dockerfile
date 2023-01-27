@@ -1,2 +1,3 @@
-FROM nginx:1
-COPY ./nginx.conf /etc/nginx/nginx.conf
+FROM jonasal/nginx-certbot:4-alpine
+
+COPY ./nginx_conf.d /etc/nginx/user_conf.d/
