@@ -13,6 +13,7 @@ For this to work on a new AWS account, the following needs to exist:
 - ECS cluster.
 - ECS service already running in aforementioned cluster.
 - An IAM user with appropriate permissions with its secret in GitHub secret.
+- All the secret and environment variable [continuous-deloyment.yml](.github/workflows/continuous-deloyment.yml) reference in GitHub.
 
 ## How to add a repo to a subdomain
 To be filled
