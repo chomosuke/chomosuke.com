@@ -4,6 +4,11 @@ on:
     branches:
       - master
 env:
+  ECR_REGISTRY_ALIAS: m4l5t7p6
+  ECR_REPOSITORY: chomosuke-com
+  ECS_CLUSTER: chomosuke-com
+  ECS_REGION: ap-southeast-2
+  ECS_SERVICE: chomosuke-com
   ECS_TASK_DEFINITION: task-definition.json
   CONTAINER_NAME: chomosuke-com
 
@@ -34,8 +39,8 @@ jobs:
         id: build-image
         env:
           ECR_REGISTRY: ${{ steps.login-ecr-public.outputs.registry }}
-          ECR_REGISTRY_ALIAS: ${{ vars.ECR_REGISTRY_ALIAS }}
-          ECR_REPOSITORY: ${{ vars.ECR_REPOSITORY }}
+          ECR_REGISTRY_ALIAS: ${{ env.ECR_REGISTRY_ALIAS }}
+          ECR_REPOSITORY: ${{ env.ECR_REPOSITORY }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
           # Build a docker container and
@@ -52,7 +57,7 @@ jobs:
       - name: Switch AWS Region
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-region: ${{ vars.ECS_REGION }}
+          aws-region: ${{ env.ECS_REGION }}
 
       - name: Fill in the new image ID in the Amazon ECS task definition
         id: task-def
@@ -68,6 +73,6 @@ jobs:
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
           task-definition: ${{ steps.task-def.outputs.task-definition }}
-          service: ${{ vars.ECS_SERVICE }}
-          cluster: ${{ vars.ECS_CLUSTER }}
+          service: ${{ env.ECS_SERVICE }}
+          cluster: ${{ env.ECS_CLUSTER }}
           wait-for-service-stability: true
