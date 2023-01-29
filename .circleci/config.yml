@@ -6,7 +6,7 @@ jobs:
   build-and-push-image:
     machine:
       image: ubuntu-2004:2022.04.1
-    resource_class: arm.medium
+    resource_class: arm.large
     steps:
       - aws-ecr/build-and-push-image:
           platform: linux/arm64
@@ -17,12 +17,23 @@ jobs:
           repo: chomosuke-com
 
 workflows:
-  build-and-push-image:
+  build-deploy:
     jobs:
       - build-and-push-image:
           filters:
             branches:
               only: [master]
           context: [chomosuke-com-aws-deploy]
+      - aws-ecs/deploy-service-update:
+          context: [chomosuke-com-aws-deploy]
+          requires: [build-and-push-image]
+
+          family: chomosuke-com
+          cluster: chomosuke-com
+          container-image-name-updates:
+            'container=chomosuke-com,tag=${CIRCLE_SHA1}'
+          enable-circuit-breaker: true
+          verify-revision-is-deployed: true
+          max-poll-attempts: 60
 
 # vim: ts=2:sw=2:
