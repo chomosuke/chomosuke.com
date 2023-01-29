@@ -34,7 +34,6 @@ workflows:
             'container=chomosuke-com,tag=${CIRCLE_SHA1}'
           enable-circuit-breaker: true
           verify-revision-is-deployed: true
-          max-poll-attempts: 60
-          poll-interval: 10
+          poll-interval: 8
 
 # vim: ts=2:sw=2:
