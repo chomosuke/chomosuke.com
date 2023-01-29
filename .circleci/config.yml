@@ -2,19 +2,27 @@ version: 2.1
 orbs:
   aws-ecr: circleci/aws-ecr@8
   aws-ecs: circleci/aws-ecs@3
-workflows:
+jobs:
   build-and-push-image:
-    jobs:
+    machine:
+      image: ubuntu-2004:2022.04.1
+    resource_class: arm.medium
+    steps:
       - aws-ecr/build-and-push-image:
-          filters:
-            branches:
-              only: [master]
-          context: [chomosuke-com-aws-deploy]
           platform: linux/arm64
           public-registry: true
           public-registry-alias: m4l5t7p6
           region: us-east-1
           tag: "${CIRCLE_SHA1}"
           repo: chomosuke-com
+
+workflows:
+  build-and-push-image:
+    jobs:
+      - build-and-push-image:
+          filters:
+            branches:
+              only: [master]
+          context: [chomosuke-com-aws-deploy]
 
 # vim: ts=2:sw=2:
