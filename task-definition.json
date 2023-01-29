@@ -1,7 +1,10 @@
 {
+    "family": "chomosuke-com",
     "containerDefinitions": [
         {
             "name": "chomosuke-com",
+            "image": "<REPLACE THIS WITH REAL IMAGE>",
+            "cpu": 0,
             "memoryReservation": 6,
             "portMappings": [
                 {
@@ -15,16 +18,36 @@
                     "protocol": "tcp"
                 }
             ],
-            "essential": true
+            "essential": true,
+            "environment": [
+                {
+                    "name": "CERTBOT_EMAIL",
+                    "value": "a13323600@gmail.com"
+                }
+            ],
+            "mountPoints": [
+                {
+                    "containerPath": "/etc/letsencrypt",
+                    "sourceVolume": "letsencrypt-volume"
+                }
+            ],
+            "volumesFrom": []
         }
     ],
-    "family": "chomosuke-com",
+    "volumes": [
+        {
+            "host": {
+                "sourcePath": "/etc/letsencrypt"
+            },
+            "name": "letsencrypt-volume"
+        }
+    ],
     "networkMode": "host",
+    "requiresCompatibilities": [
+        "EC2"
+    ],
     "runtimePlatform": {
         "cpuArchitecture": "ARM64",
         "operatingSystemFamily": "LINUX"
-    },
-    "requiresCompatibilities": [
-        "EC2"
-    ]
+    }
 }
