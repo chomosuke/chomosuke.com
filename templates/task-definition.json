@@ -1,0 +1,26 @@
+{
+    "containerDefinitions": [
+        {
+            "name": "<CONTAINER_NAME>",
+            "image": "<REPLACE THIS WITH REAL IMAGE>",
+            "memoryReservation": 6,
+            "portMappings": [
+                {
+                    "containerPort": "<PORT>",
+                    "hostPort": "<PORT>",
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true
+        }
+    ],
+    "family": "<CONTAINER_NAME>",
+    "networkMode": "host",
+    "runtimePlatform": {
+        "cpuArchitecture": "ARM64",
+        "operatingSystemFamily": "LINUX"
+    },
+    "requiresCompatibilities": [
+        "EC2"
+    ]
+}
