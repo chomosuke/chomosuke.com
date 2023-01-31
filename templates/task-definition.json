@@ -11,10 +11,23 @@
                     "protocol": "tcp"
                 }
             ],
-            "essential": true
+            "essential": true,
+            "environment": [
+                {
+                    "name": "<SOME NAME>",
+                    "value": "<SOME VALUE>"
+                }
+            ],
+            "secrets": [
+                {
+                    "name": "<SOME NAME>",
+                    "valueFrom": "<SOME ARN>"
+                }
+            ]
         }
     ],
     "family": "<CONTAINER_NAME>",
+    "executionRoleArn": "<SOME ROLE THAT CAN GET THE SECRET>",
     "networkMode": "host",
     "runtimePlatform": {
         "cpuArchitecture": "ARM64",

@@ -30,7 +30,13 @@ For this to work on a new AWS account, the following needs to exist:
 	- Make sure that container name and family name match the `<CONTAINER_NAME>` chosen earlier
 	- Make sure that `"portMappings"` map to the previously chosen `<PORT>`.
 	- Make sure that `"image"` is the URI of the newly pushed image.
-- Deploy the task definition to `chomosuke-com` cluster. Make sure the service name is the same as `<CONTAINER_NAME>`.
+	- Make sure all `"environment"` and `"secrets"` that the container need is filled out.
+		- To add a secret. Go to AWS secret manager to add the secret and then create a role with the permission to get the secret and set that as the `"executionRoleArn"`. Remember to add pass role permission to IAM user `chomosuke-com-cd` later.
+- Deploy the task definition to `chomosuke-com` cluster.
+	- Set launch type to `EC2`.
+	- Make sure application type is `Service`.
+	- Set Service name to be the same as `<CONTAINER_NAME>`.
+	- Set Service type to `Daemon`.
 - Modify IAM user `chomosuke-com-cd` with permission to deploy to the new service and pass any role that might be needed by the service.
 - Uncomment the second part, commit and push the changes.
 
