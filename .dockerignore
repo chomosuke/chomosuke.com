@@ -1,0 +1,8 @@
+/pages/*/node_modules
+/pages/*/build
+/pages/*/.dart_tool
+/pages/*/.idea
+/pages/*/*.iml
+
+.dockerignore
+Dockerfile
