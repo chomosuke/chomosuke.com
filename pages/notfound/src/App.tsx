@@ -1,6 +1,7 @@
-import karasu from "./karasu.jpg";
+import karasu from "./karasu.png";
 import Levenshtein from "levenshtein";
 import { Button } from "@mui/material";
+import { useViewport } from "./viewport";
 
 export function App() {
   const subdomain = window.location.hostname;
@@ -17,6 +18,10 @@ export function App() {
       new Levenshtein(subdomain, b).distance
   );
 
+  const viewport = useViewport();
+
+  const karasuMargin = viewport.width > 512 ? 64 : viewport.width / 8;
+
   return (
     <div
       style={{
@@ -30,7 +35,7 @@ export function App() {
     >
       <div
         style={{
-          width: "50%",
+          width: viewport.width < 480 ? 240 : "50%",
           height: "fit-content",
           paddingBottom: 100,
         }}
@@ -56,7 +61,7 @@ export function App() {
         src={karasu}
         alt="karasu"
         width="150"
-        style={{ position: "absolute", bottom: 64, right: 64 }}
+        style={{ position: "absolute", bottom: karasuMargin, right: karasuMargin }}
       />
     </div>
   );
