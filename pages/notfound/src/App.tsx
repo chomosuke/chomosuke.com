@@ -43,16 +43,14 @@ export function App() {
           of the following instead?
         </p>
         {validSubdomains.map((validSubdomain) => (
-          <>
-            <Button
-              variant="outlined"
-              href={`https://${validSubdomain}/`}
-              fullWidth={true}
-              sx={{ marginBottom: "16px" }}
-            >
-              {validSubdomain}
-            </Button>
-          </>
+          <Button
+            variant="outlined"
+            href={`https://${validSubdomain}/`}
+            fullWidth={true}
+            sx={{ marginBottom: "16px" }}
+          >
+            {validSubdomain}
+          </Button>
         ))}
       </div>
       <img
