@@ -9,7 +9,6 @@ export function App() {
     "lumpime.chomosuke.com",
     "catballchard.chomosuke.com",
     "chomosuke.com",
-    "profile.chomosuke.com",
   ];
 
   validSubdomains.sort(
