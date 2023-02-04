@@ -1,8 +1,7 @@
 FROM node:19 as react-builder
 # install dependencies first
 WORKDIR /pages/notfound
-COPY ./pages/notfound/package.json ./
-COPY ./pages/notfound/package-lock.json ./
+COPY ./pages/notfound/package-lock.json ./pages/notfound/package.json ./
 RUN npm ci
 # copy app and build
 WORKDIR /pages/notfound
