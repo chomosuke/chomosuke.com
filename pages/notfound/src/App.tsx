@@ -47,13 +47,11 @@ export function App() {
             <Button
               variant="outlined"
               href={`https://${validSubdomain}/`}
-              size="small"
               fullWidth={true}
+              sx={{ marginBottom: "16px" }}
             >
               {validSubdomain}
             </Button>
-            <br />
-            <br />
           </>
         ))}
       </div>
