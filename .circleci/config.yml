@@ -2,6 +2,7 @@ version: 2.1
 orbs:
   aws-ecr: circleci/aws-ecr@8
   aws-ecs: circleci/aws-ecs@3
+  aws-cli: circleci/aws-cli@3
 jobs:
   build-and-push-image:
     machine:
@@ -18,13 +19,15 @@ jobs:
           region: us-east-1
           tag: "${CIRCLE_SHA1}"
           repo: chomosuke-com
+
   deploy-service-update:
     docker:
       - image: cimg/python:3.10.4
     resource_class: small
     environment:
-      AWS_REGION: ap-southeast-2
+      AWS_DEFAULT_REGION: ap-southeast-2
     steps:
+      - aws-cli/setup
       - aws-ecs/update-service:
           family: chomosuke-com
           cluster: chomosuke-com
@@ -43,6 +46,5 @@ workflows:
               only: [master]
       - deploy-service-update:
           requires: [build-and-push-image]
-
 
 # vim: ts=2:sw=2:
