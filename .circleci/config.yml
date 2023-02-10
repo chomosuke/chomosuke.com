@@ -6,6 +6,7 @@ jobs:
   build-and-push-image:
     machine:
       image: ubuntu-2004:2022.04.1
+      docker_layer_caching: true
     resource_class: arm.large
     environment:
       AWS_ECR_REGISTRY_ID: 441989054812
