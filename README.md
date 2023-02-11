@@ -23,14 +23,14 @@ For this to work on a new AWS account, the following needs to exist:
 	- Replace `<SUBDOMAIN>` with the desirable subdomain.
 	- Replace `<PORT>` with a port that isn't used by any other subdomain in [nginx_conf.d](./nginx_conf.d).
 - Add an AWS access key for an IAM user with the appropriate permission on CircleCI as project environment variables.
-- Create a new repository in the AWS ECR registry m4l5t7p6
+- Create a new repository in the AWS ECR registry `m4l5t7p6`
 	- The convention is to have the repo name same as `<SUBDOMAIN>`.
 	- It's recommended to set Content types.
 	- Add the permission to push to this repository to the IAM user mentioned before.
 - Copy [templates/config.yml](./templates/config.yml) into `.circleci` directory of the project.
 	- Replace `<CONTAINER_NAME>` with a suitable name. The convention is to make it the same as `<SUBDOMAIN>`.
 	- Replace `<REPO>` with the repository name created earlier.
-- Comment out the second jobs at the bottom and run it on CircleCI. This should push the docker image to `chomosuke-com` ECR repository.
+- Comment out the second jobs at the bottom and run it on CircleCI. This should push the docker image to the previously created ECR repository.
 - Create task definition with the newly pushed image.
 	- [templates/task-definition.json](./templates/task-definition.json) can be used as a starting point.
 	- Make sure that container name and family name match the `<CONTAINER_NAME>` chosen earlier
