@@ -21,6 +21,7 @@ For this to work on a new AWS account, the following needs to exist:
 ## How to add a repo to a subdomain
 - Copy [templates/nginx.conf](./templates/nginx.conf) into [nginx_conf.d](./nginx_conf.d) and rename it with an appropriate name.
 	- Replace `<SUBDOMAIN>` with the desirable subdomain.
+		- Optionally, add the subdomain to the [notfound page](./pages/notfound/src/App.tsx) `validSubdomains`.
 	- Replace `<PORT>` with a port that isn't used by any other subdomain in [nginx_conf.d](./nginx_conf.d).
 - Add an AWS access key for an IAM user with the appropriate permission on CircleCI as project environment variables.
 - Create a new repository in the AWS ECR registry `m4l5t7p6`
