@@ -9,6 +9,7 @@ export function App() {
   const validSubdomains = [
     "lumpime.chomosuke.com",
     "catballchard.chomosuke.com",
+    "porkbellypro.chomosuke.com",
     "chomosuke.com",
   ];
 
@@ -61,7 +62,11 @@ export function App() {
         src={karasu}
         alt="karasu"
         width="150"
-        style={{ position: "absolute", bottom: karasuMargin, right: karasuMargin }}
+        style={{
+          position: "absolute",
+          bottom: karasuMargin,
+          right: karasuMargin,
+        }}
       />
     </div>
   );
